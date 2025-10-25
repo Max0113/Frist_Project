@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC verson="1.0">
+    <qresource prefix="/">
+        <file>...</file>
+    </qresource>
+</RCC>

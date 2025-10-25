@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>793</width>
+    <height>473</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PyDownlodloader</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #2E2A27;   /* بني غامق */
+    color: #FFA500;              /* برتقالي */
+    font-family: Arial;
+}
+
+/* Tabs */
+QTabWidget::pane {
+    border: 1px solid #A0522D;
+    background: #2E2A27;
+}
+QTabBar::tab {
+    background: #3B322C;
+    color: #FFA500;
+    padding: 6px 12px;
+    border: 1px solid #A0522D;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #FFA500;
+    color: #2E2A27;
+}
+
+/* Menu bar */
+QMenuBar {
+    background-color: #3B322C;
+    color: #FFA500;
+}
+QMenuBar::item:selected {
+    background: #FFA500;
+    color: #2E2A27;
+}
+QMenu {
+    background-color: #2E2A27;
+    color: #FFA500;
+    border: 1px solid #A0522D;
+}
+QMenu::item:selected {
+    background: #FFA500;
+    color: #2E2A27;
+}
+
+/* Labels */
+QLabel {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+/* LineEdit */
+QLineEdit {
+    background-color: #3B322C;
+    color: #FFA500;
+    border: 1px solid #FFA500;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #FFA500;
+    color: #2E2A27;
+    border: 2px solid #A0522D;
+    border-radius: 6px;
+    padding: 6px;
+}
+QPushButton:hover {
+    background-color: #FFB733;
+}
+QPushButton:pressed {
+    background-color: #CC8400;
+}</string>
+  </property>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>69</y>
+     <width>511</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>220</y>
+     <width>231</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>1080p</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>720p</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>360p</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>144p</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>225</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Qualty</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>66</x>
+     <y>152</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Save Location</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>310</y>
+     <width>641</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>80</y>
+     <width>41</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>URL</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>221</x>
+     <y>140</y>
+     <width>431</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+    </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>370</y>
+     <width>171</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Start Downlod</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>659</x>
+     <y>140</y>
+     <width>71</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Browse</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>233</y>
+     <width>291</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string># il ne exest pas maintenat cet option</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
