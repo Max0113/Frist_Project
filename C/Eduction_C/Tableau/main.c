@@ -2,21 +2,29 @@
 #include <stdlib.h>
 #define NB 3
 
-int monotone(int* , int) ;
 int Input(int* ,int);
 int Afficher(int* , int) ;
+
 int Somme (int* , int* , int* , int) ;
+int Soustraction (int* , int* , int* , int) ;
+int Multiplication (int* , int* , int* , int) ;
+int Division (int* , int* , int* , int) ;
+
 int Max(int* ,int);
 int Min(int* ,int);
+
+int monotone(int* , int) ;
 
 int main () {
     int arrayA[NB];
     int arrayB[NB];
-    int S_Tab[NB];
+    int O_Tab[NB];
 
     int CH ;
     char AB ;
+
     // ETAP1
+
     printf("Entrer les valeur de TABLAUE A : \n");  
     Input(arrayA , NB);
     system("cls");
@@ -26,21 +34,46 @@ int main () {
     system("cls");
 
     // ETAP2
+
     printf("LES VALEUR DE TABLAUE A et B : \n");
     Afficher(arrayA , NB) ;
     Afficher(arrayB , NB);
 
     printf("MENU : \n"
-           "1 - calcule la somme de deux tableux \n"
+           "1 - Operation de deux tableux \n"
            "2 - la montone de Tableau \n"
            "3 - Max et Min de Tableau \n"
            "CHoise 1-3 : ");
     scanf("%d",&CH);
+    
+    // Operation de deux tableaux
+
     if (CH == 1) {
-        printf("La Somme est : \n");
-        Somme(arrayA,arrayB,S_Tab,NB);
-        Afficher(S_Tab , NB) ;
-    }else if (CH == 2) {  
+        system("cls");
+        Afficher(arrayA , NB) ;
+        Afficher(arrayB , NB);
+        printf("----------------------------------------------------- \n");
+        printf("Choise le Type de Operations (-|+|*|/) : ");
+        scanf(" %c", &AB);
+        if (AB == '+') {
+            Somme(arrayA,arrayB,O_Tab,NB);
+            Afficher(O_Tab , NB) ;
+        }else if (AB == '-') {
+            Soustraction(arrayA,arrayB,O_Tab,NB);
+            Afficher(O_Tab , NB) ;
+        }else if (AB == '*'){
+            Multiplication(arrayA,arrayB,O_Tab,NB);
+            Afficher(O_Tab , NB) ;
+        }
+        else {
+            Division(arrayA,arrayB,O_Tab,NB);
+            Afficher(O_Tab , NB) ;
+        }
+    }
+    
+    // La montone de tableaux
+
+    else if (CH == 2) {  
         system("cls");   
         for (int i = 0 ; i <2 ; i++) {
             printf("Choise Entrer Tableau A et B : \n");
@@ -53,7 +86,11 @@ int main () {
                 printf("chaqui que la valeur est A ou B");
             }
         } 
-    }else {
+    }
+
+    // Max & Min de tableaux
+    
+    else {
         system("cls");
         printf("Choise Entrer Tableau A et B : \n");
         scanf(" %c", &AB);
@@ -66,12 +103,13 @@ int main () {
         }else {
             printf("chaqui que la valeur est A ou B");
         }
-
     }
-    printf("Merce ????????\n");
+    printf("\n Merce ???????? \n");
 }
 
 //  ========= LES METHODS =============
+
+// Max & Min
 
 int Max(int* array_ , int nb) {
     int M = 0 ; 
@@ -93,26 +131,33 @@ int Min(int* array_ , int nb) {
     return Mi ;
 }
 
-int Somme(int* arrayA_ , int* arrayB_ , int* Somme_ , int nb) {
+// Operations
+
+int Somme (int* arrayA_ , int* arrayB_ , int* Somme_ , int nb) {
     for (int i = 0 ; i < nb ; i++) {
         Somme_[i] = arrayA_[i] + arrayB_[i] ;
     }
 }
 
-int Afficher(int* array_ , int nb) {
-    printf("=> [");
+int Soustraction (int* arrayA_ , int* arrayB_ , int* Somme_ , int nb) {
     for (int i = 0 ; i < nb ; i++) {
-        printf(" %d ", array_[i]);
+        Somme_[i] = arrayA_[i] - arrayB_[i] ;
     }
-    printf("] \n");
 }
 
-int Input (int* array_ , int nb){
-    for (int i = 0; i < nb ; i++) {
-        printf("Array[%d] = ",i+1);
-        scanf("%d", &array_[i]);
+int Multiplication (int* arrayA_ , int* arrayB_ , int* Somme_ , int nb) {
+    for (int i = 0 ; i < nb ; i++) {
+        Somme_[i] = arrayA_[i] * arrayB_[i] ;
     }
 }
+
+int Division (int* arrayA_ , int* arrayB_ , int* Somme_ , int nb) {
+    for (int i = 0 ; i < nb ; i++) {
+        Somme_[i] = arrayA_[i] / arrayB_[i] ;
+    }
+}
+
+// La montone
 
 int monotone(int* array_ , int nb) {
     int i = 0 ;
@@ -137,4 +182,21 @@ int monotone(int* array_ , int nb) {
     }
     printf("\n");
 
+}
+
+// Afficher & Saiser 
+
+int Afficher(int* array_ , int nb) {
+    printf("=> [");
+    for (int i = 0 ; i < nb ; i++) {
+        printf(" %d ", array_[i]);
+    }
+    printf("] \n");
+}
+
+int Input (int* array_ , int nb){
+    for (int i = 0; i < nb ; i++) {
+        printf("Array[%d] = ",i+1);
+        scanf("%d", &array_[i]);
+    }
 }
