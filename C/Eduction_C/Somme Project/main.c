@@ -10,8 +10,8 @@ int main() {
         printf("Erreur de lecture de N.\n");
         return 1;
     }
-    for (int i = 0; i < N; i++) {
-        S = i + S + 1;
+    for (int i = 1; i < N; i++) {
+        S = i + S ;
     }
     printf("La somme des nombres de 1 a %d est : %d\n", N, S);
 
