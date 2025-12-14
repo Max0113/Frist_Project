@@ -1,9 +1,112 @@
-from tkinter import *
-from os import *
+from os import system
 
 
-def clear() :
+def clear():
+    """Clear the console screen."""
     system("cls")
+
+
+class Login:
+    """
+    Class to manage user login with username and password verification.
+    """
+
+    def __init__(self):
+        self.username = ""
+        self.password = ""
+
+    def verify_username(self, valid_usernames):
+        """
+        Prompt for username and verify if it is in the list of valid usernames.
+        :param valid_usernames: List of allowed usernames (case insensitive).
+        :return: True if username is valid, False otherwise.
+        """
+        self.username = input("Enter your Username: ").lower()
+        return self.username in valid_usernames
+
+    def verify_password(self, valid_passwords):
+        """
+        Prompt for password and verify if it is in the list of valid passwords.
+        :param valid_passwords: List of allowed passwords.
+        :return: True if password is valid, False otherwise.
+        """
+        self.password = input("Enter your Password: ")
+        return self.password in valid_passwords
+
+
+class Menu:
+    """
+    Class for displaying menus and capturing user choices.
+    """
+
+    def main_menu(self):
+        """Display the main menu and return the user's choice as a string."""
+        print("""
+        ======================================
+                         Main Menu
+        ======================================
+          1- Client Management
+          2- Employee Management
+          3- Money Management
+          4- File Management
+          5- Quit
+        """, end="")
+        while True:
+            choice = input("Enter your choice: ")
+            if choice in ['1', '2', '3', '4', '5']:
+                return choice
+            else:
+                print("Invalid choice. Please enter a number from 1 to 5.")
+
+    def clients_menu(self):
+        """Display the client management menu and return user choice."""
+        print("""
+        ======================================
+                       Clients Menu
+        ======================================
+          1- Add a client
+          2- Remove a client
+          3- Return to main menu
+        """, end="")
+        while True:
+            choice = input("Enter your choice: ")
+            if choice in ['1', '2', '3']:
+                return choice
+            else:
+                print("Invalid choice. Please enter 1, 2, or 3.")
+
+    def employees_menu(self):
+        """Display the employee management menu and return user choice."""
+        print("""
+        ======================================
+                      Employees Menu
+        ======================================
+          1- Add an employee
+          2- Remove an employee
+          3- Employee Salary
+          4- Employee Points
+          5- Return to main menu
+        """, end="")
+        while True:
+            choice = input("Enter your choice: ")
+            if choice in ['1', '2', '3', '4', '5']:
+                return choice
+            else:
+                print("Invalid choice. Please enter a number from 1 to 5.")
+
+    def files_menu(self):
+        """Display the file management menu and return user choice."""
+        print("""
+        ======================================
+                       File Menu
+        ======================================
+          1- Employee data
+          2- Client data
+          3- Bounce money
+
+        """, end="")
+        choice = input("Enter your choice: ")
+        return choice
 
 
 class LogoIN :
@@ -27,41 +130,15 @@ class Menu :
                              Menu
             ======================================
               1- Gestion des clients
-              4- Gestion des Monye
-              5- Gestion des fichier
-              6- Quit
-        """,end="")
-        x = input("      Entrer choix : ")
-        return x
-    
-    def Menu_Pr_chaf(self) :
-        print("""
-            ======================================
-                             Menu
-            ======================================
-              1- Gestion des clients
-              2- Gestion des clients VIP
-              3- Gestion des Employe
-              4- Gestion des Monye
-              5- Gestion des fichier
-              6- Quit
+              2- Gestion des Employe
+              3- Gestion des Monye
+              4- Gestion des fichier
+              5- Quit
         """,end="")
         x = input("      Entrer choix : ")
         return x
     
     def Menu_clients(self) :
-        print("""
-            ======================================
-                             Menu
-            ======================================
-              1- Ajout une clients
-              2- remove une clients
-              3- return a Menu_Pr
-        """,end="")
-        x = input("      Entrer choix : ")
-        return x
-    
-    def Menu_clients_VIP(self) :
         print("""
             ======================================
                              Menu
@@ -94,20 +171,6 @@ class Menu :
             ======================================
               1- les donne de Employe
               2- les donne de clients
-              3- les argen de Bounce
-
-        """,end="")
-        x = input("      Entrer choix : ")
-        return x
-    
-    def Menu_ficher_chef(self) :
-        print("""
-            ======================================
-                             Menu
-            ======================================
-              1- les donne de Employe
-              2- les donne de clients
-              3- les donne de clientsVIP
               4- les argen de Bounce
 
         """,end="")
@@ -116,19 +179,19 @@ class Menu :
         
 class BD_clients :
     def __init__(self):
-        self.clients = [[1, 2, 3], ["Younes", "Amin", "Ahmed"], [1200, 2333, 2133]]
+        self.clients = [["D00", "D01", "D02"], ["Younes", "Amin", "Ahmed"], [1200, 2333, 2133]]
     
     def Afficher_clients(self):
-        print(" |  ID  |     Name     |     Argen    |")
-        print("----------------------------------------")
+        print("\t |   ID   |     Name     |      Argen    |")
+        print("\t----------------------------------------------")
         for i in range(len(self.clients[0])):  # parcourir par index
             id_client = self.clients[0][i]
             name_client = self.clients[1][i]
             argent_client = self.clients[2][i]
-            print(f" |  {id_client}   | {name_client:^12} |  {argent_client:^10}  |")
+            print(f"\t |  {id_client:^4}   | {name_client:^12} |  {argent_client:^10}  |")
     
     def Add_clients(self) :
-        id = int(input("Entrer Id :"))
+        id = input("Entrer Id :")
         name = input("Entrer name :")
         argen = float(input("Entrer argen :"))
         self.clients[0].append(id)
@@ -136,7 +199,7 @@ class BD_clients :
         self.clients[2].append(argen)
 
     def Remove_clients(self) :
-        id_client = int(input("Entrer l'ID du client à supprimer : "))
+        id_client = input("Entrer l'ID du client à supprimer : ")
         if id_client in self.clients[0]:
             index = self.clients[0].index(id_client)
             # Supprimer le client
@@ -147,80 +210,54 @@ class BD_clients :
             print("Client supprimé avec succès !")
         else:
             print("ID non trouvé.")
-
-class BD_clientsVIP :
-    def __init__(self):
-        self.clientsVIP = [[1, 2, 3], ["Younes", "Amin", "Ahmed"], [1200, 2333, 2133]]
     
-    def Afficher_clientsVIP(self):
-        print(" |  ID  |     Name     |     Argen    |")
-        print("----------------------------------------")
-        for i in range(len(self.clientsVIP[0])):  # parcourir par index
-            id_client = self.clientsVIP[0][i]
-            name_client = self.clientsVIP[1][i]
-            argent_client = self.clientsVIP[2][i]
-            print(f" |  {id_client}   | {name_client:^12} |  {argent_client:^10}  |")
-    
-    def Add_clientsVIP(self) :
-        id = int(input("Entrer Id :"))
-        name = input("Entrer name :")
-        argen = float(input("Entrer argen :"))
-        self.clientsVIP[0].append(id)
-        self.clientsVIP[1].append(name)
-        self.clientsVIP[2].append(argen)
+    def Somme_Argon(self) :
+        argent_client = 0
+        for i in range(len(self.clients[0])):  # parcourir par index
+            argent_client += self.clients[2][i]
+        return argent_client
 
-    def Remove_clientsVIP(self) :
-        id_client = int(input("Entrer l'ID du client à supprimer : "))
-        if id_client in self.clientsVIP[0]:
-            index = self.clientsVIP[0].index(id_client)
-            # Supprimer le client
-            self.clientsVIP[0].pop(index)
-            self.clientsVIP[1].pop(index)
-            self.clientsVIP[2].pop(index)
-            clear()
-            print("Client supprimé avec succès !")
-        else:
-            print("ID non trouvé.")
+
 
 class BD_Employ :
     def __init__(self):
-        self.Employ = [[1, 2, 3], ["mohamed", "yasune", "max"], ["amzil", "borase", "londry"], [1200, 2333, 2133], [12, 0, -3]]
+        self.Employ = [["D00", "D01", "D02"], ["mohamed", "yasune", "max"], ["amzil", "borase", "londry"],["mohamed@gmail.com","mohamed@gmail.com","max@gmail.com"], [1200.0, 2333.0, 2133.0], [12.0, 0.0, -3.0]]
     
     def Afficher_Employ(self):
-        print(" |  ID  |     Name     |     Prénom    |     Argen     |     Pointer    |")
-        print("----------------------------------------")
+        print("\t |  ID  |     Name     |     Prénom    |       gmail       |     Argen     |     Pointer    |")
+        print("\t ---------------------------------------------------------------------------------------------")
         for i in range(len(self.Employ[0])):  # parcourir par index
-            id_client = self.Employ[0][i]
-            name_client = self.Employ[1][i]
-            Prénom_client = self.Employ[2][i]
-            argent_client = self.Employ[3][i]
-            Points_client = self.Employ[4][i]
-            print(f" |  {id_client}   | {name_client:^12} |  {Prénom_client:^10}  |  {argent_client:^10}$ |  +{Points_client:^10}  |")
+            id_Employ = self.Employ[0][i]
+            name_Employ = self.Employ[1][i]
+            Prénom_Employ = self.Employ[2][i]
+            gmail_Employ = self.Employ[3][i]
+            argent_Employ = self.Employ[4][i]
+            Points_Employ = self.Employ[5][i]
+            print(f"\t |  {id_Employ}   | {name_Employ:^12} |  {Prénom_Employ:^10}  |  {gmail_Employ:^15}  |  {argent_Employ:^10} |  {Points_Employ:^10}  |")
     
     def Add_Employ(self) :
-        id = int(input("Entrer Id :"))
+        id = input("Entrer Id :")
         name = input("Entrer name :")
         Prénom = input("Entrer Prénom :")
+        gmail = input("Entrer Gmail :")
         argen = float(input("Entrer argen :"))
         Points = float(input("Entrer Pointer :"))
         self.Employ[0].append(id)
         self.Employ[1].append(name)
         self.Employ[2].append(Prénom)
-        self.Employ[3].append(argen)
-        self.Employ[4].append(Points)
+        self.Employ[3].append(gmail)
+        self.Employ[4].append(argen)
+        self.Employ[5].append(Points)
 
     def Remove_Employ(self) :
-        id_client = int(input("Entrer l'ID du client à supprimer : "))
+        id_client = input("Entrer l'ID du client à supprimer : ")
         if id_client in self.Employ[0]:
             index = self.Employ[0].index(id_client)
             # Supprimer le client
-            self.Employ[0].pop(index)
-            self.Employ[1].pop(index)
-            self.Employ[2].pop(index)
-            self.Employ[3].pop(index)
-            self.Employ[4].pop(index)
+            for i in range(6) :
+                self.Employ[i].pop(index)
             clear()
-            print("Client supprimé avec succès !")
+            print("Employé supprimé avec succès !")
         else:
             print("ID non trouvé.")
 
@@ -229,7 +266,6 @@ class System_Bounce :
         self.Menu = Menu()
         self.LogoIN = LogoIN()
         self.BD_clients = BD_clients()
-        self.BD_clientsVIP = BD_clientsVIP()
         self.BD_Employ = BD_Employ()
     
     def start_sys(self) :
@@ -237,6 +273,7 @@ class System_Bounce :
             V1 = self.LogoIN.Verife_Usernam(["youness","max"])
             V2 = self.LogoIN.Verife_Password(["123456","56780"])
             if V1 and V2 :
+                clear()
                 print("Login Success \n")
                 self.part1()
             else : 
@@ -260,9 +297,33 @@ class System_Bounce :
                     continue
 
             # Quitter
-            elif CH == 6:
-                print("Bye 👋")
-                exit()
+            elif CH == 2:
+                clear()
+                self.BD_Employ.Afficher_Employ()
+                CH1 = int(self.Menu.Menu_Employe())
+                if CH1 == 1:
+                    self.BD_Employ.Add_Employ()
+                elif CH1 == 2:
+                    self.BD_Employ.Remove_Employ()
+                elif CH1 == 3:
+                    clear()
+                    continue
+            
+            elif CH == 3: 
+                clear()
+                print("la Bounce :",self.BD_clients.Somme_Argon(),"$")
+                CH3 = input("Quit ou No :")
+                if CH3.upper() == "NO" :
+                    clear()
+                    continue
+                else :
+                    quit()
+            
+            else :
+                quit()
+        
+        def GestionMone(self) :
+            pass
 
         
 x = System_Bounce()
