@@ -1,3 +1,4 @@
+import os
 from os import system
 
 
@@ -33,80 +34,6 @@ class Login:
         self.password = input("Enter your Password: ")
         return self.password in valid_passwords
 
-
-class Menu:
-    """
-    Class for displaying menus and capturing user choices.
-    """
-
-    def main_menu(self):
-        """Display the main menu and return the user's choice as a string."""
-        print("""
-        ======================================
-                         Main Menu
-        ======================================
-          1- Client Management
-          2- Employee Management
-          3- Money Management
-          4- File Management
-          5- Quit
-        """, end="")
-        while True:
-            choice = input("Enter your choice: ")
-            if choice in ['1', '2', '3', '4', '5']:
-                return choice
-            else:
-                print("Invalid choice. Please enter a number from 1 to 5.")
-
-    def clients_menu(self):
-        """Display the client management menu and return user choice."""
-        print("""
-        ======================================
-                       Clients Menu
-        ======================================
-          1- Add a client
-          2- Remove a client
-          3- Return to main menu
-        """, end="")
-        while True:
-            choice = input("Enter your choice: ")
-            if choice in ['1', '2', '3']:
-                return choice
-            else:
-                print("Invalid choice. Please enter 1, 2, or 3.")
-
-    def employees_menu(self):
-        """Display the employee management menu and return user choice."""
-        print("""
-        ======================================
-                      Employees Menu
-        ======================================
-          1- Add an employee
-          2- Remove an employee
-          3- Employee Salary
-          4- Employee Points
-          5- Return to main menu
-        """, end="")
-        while True:
-            choice = input("Enter your choice: ")
-            if choice in ['1', '2', '3', '4', '5']:
-                return choice
-            else:
-                print("Invalid choice. Please enter a number from 1 to 5.")
-
-    def files_menu(self):
-        """Display the file management menu and return user choice."""
-        print("""
-        ======================================
-                       File Menu
-        ======================================
-          1- Employee data
-          2- Client data
-          3- Bounce money
-
-        """, end="")
-        choice = input("Enter your choice: ")
-        return choice
 
 
 class LogoIN :
@@ -261,12 +188,62 @@ class BD_Employ :
         else:
             print("ID non trouvé.")
 
+class Gestion_Ficher() : 
+    def __init__(self, bd_clients, bd_employ):
+        self.clients = bd_clients.clients
+        self.Employ = bd_employ.Employ
+
+    def ficher_clinet(self,User) :
+        ch = input("Entrer le nom de ficher :")
+        with open(ch+".txt", "w", encoding="utf-8") as f:
+            f.write("\t \t Rappor de Client \n \n")
+            f.write("\t |  ID  |     Name     |    Argent    |\n")
+            f.write("\t---------------------------------------\n")
+
+            for i in range(len(self.clients[0])):
+                id_client = self.clients[0][i]
+                name_client = self.clients[1][i]
+                argent_client = self.clients[2][i]
+
+                f.write(
+                f"\t | {id_client:^4} | {name_client:^12} | {argent_client:^10} | \n"
+                )
+
+            
+            f.write(f"\n Extord bay {User}")
+            print(os.getcwd())
+
+
+    def ficher_Emplaye(self,User) :
+        ch = input("Entrer le nom de ficher :")
+        with open(ch+".txt", "w", encoding="utf-8") as f:
+            f.write("\t \t \t \t \t Rappor de Client \n \n")
+            f.write("\t |  ID  |    Name     |     Prénom    |       gmail       |     Argen     |     Pointer    |\n")
+            f.write("\t---------------------------------------------------------------------------------------------------\n")
+
+            for i in range(len(self.Employ[0])) :
+                id_Employ = self.Employ[0][i]
+                name_Employ = self.Employ[1][i]
+                Prénom_Employ = self.Employ[2][i]
+                gmail_Employ = self.Employ[3][i]
+                argent_Employ = self.Employ[4][i]
+                Points_Employ = self.Employ[5][i]
+
+                f.write(
+                f"\t |  {id_Employ}   | {name_Employ:^12} |  {Prénom_Employ:^10}  |  {gmail_Employ:^15}  |  {argent_Employ:^10} |  {Points_Employ:^10}  |\n"
+                )
+            
+            f.write(f"\n Extord bay {User}")
+            print(os.getcwd())
+
+            
 class System_Bounce :
     def __init__(self):
         self.Menu = Menu()
         self.LogoIN = LogoIN()
         self.BD_clients = BD_clients()
         self.BD_Employ = BD_Employ()
+        self.Gestion_Ficher = Gestion_Ficher(self.BD_clients, self.BD_Employ)
     
     def start_sys(self) :
         while True :
@@ -319,11 +296,25 @@ class System_Bounce :
                 else :
                     quit()
             
+            elif CH == 4 :
+                clear()
+                CH4 = int(self.Menu.Menu_ficher())
+                user = self.LogoIN.Usernam
+                if CH4 == 1 :
+                    self.Gestion_Ficher.ficher_clinet(user)
+                elif CH4 == 2 :
+                    self.Gestion_Ficher.ficher_Emplaye(user)
+                
+                CH3 = input("Quit ou No :")
+                if CH3.upper() == "NO" :
+                    clear()
+                    continue
+                else :
+                    quit()
+
             else :
                 quit()
         
-        def GestionMone(self) :
-            pass
 
         
 x = System_Bounce()
